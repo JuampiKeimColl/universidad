@@ -37,7 +37,7 @@ public class ProfesorController {
                                        @RequestParam(required = false) String curso, ModelMap modelMap){
         log.info("Creando Profesor: " + apellido + " DNI: " + dni);
         try {
-        profesorService.crearProfesor(dni,apellido);
+        profesorService.crearProfesor(dni,apellido, curso);
         modelMap.put("crear", "Alumno " + apellido + " creado con éxito. ");
 
         }catch (AtrapaErrores er){

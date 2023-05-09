@@ -64,9 +64,9 @@ public class AdministradorController {
         return "alumno_lista.html";
     }
 
-    @GetMapping("/modificar/{id}")
-    public String modificarAlumno(@PathVariable Integer dni, ModelMap modelMap){
-        modelMap.put("alumno",alumnoService.getOne(dni));
+    @GetMapping("/modificar/{alumnoId}")
+    public String modificarAlumno(@PathVariable long alumnoId, ModelMap modelMap){
+        modelMap.put("alumno",alumnoService.getOne(alumnoId));
 
         return "alumno_modificar.html";
     }

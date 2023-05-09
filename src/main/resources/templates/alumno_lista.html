@@ -8,6 +8,11 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <style>
+        body {
+            background-color: #333;
+            font-family: Arial, sans-serif;
+            color: #333;
+        }
         table {
             border-collapse: collapse;
             width: 100%;
@@ -60,7 +65,7 @@
                         <td th:text="${alumno.apellido}"></td>
                         <td th:text="${alumno.direccion}"></td>
                         <td>
-                            <a th:href="@{/alumno/modificar/__${alumno.dni}__}"><i class="fas fa-edit"></i> Editar </a>
+                            <a th:href="@{/administrador/modificar/__${alumno.alumnoId}__}"><i class="fas fa-edit"></i> Editar </a>
                             <a> / </a>
                             <a><i class="fas fa-trash-alt"></i> Eliminar </a>
                         </td>

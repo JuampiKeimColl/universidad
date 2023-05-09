@@ -10,9 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -34,6 +32,7 @@ public class AlumnoService {
         alumno.setApellido(apellido);
         alumno.setEdad(edad);
         alumno.setDireccion(direccion);
+        alumno.setEstado("activo");
         alumno.setFechaAlta(LocalDateTime.now());
 
         alumnoRepository.save(alumno);

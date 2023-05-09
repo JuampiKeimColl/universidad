@@ -2,66 +2,90 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Universidad Tuki</title>
+    <title>Crear Profesor</title>
+    <style>
+        body {
+            background-color: #333;
+            font-family: Arial, sans-serif;
+            color: #fff;
+        }
+        .container {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .form {
+            max-width: 400px;
+            padding: 50px;
+            background-color: #444;
+            border-radius: 5px;
+        }
+        .form label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        .form input[type="text"],
+        .form input[type="number"],
+        .form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            background-color: #666;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            font-size: 16px;
+        }
+        .form input[type="text"]:focus,
+        .form input[type="number"]:focus,
+        .form textarea:focus {
+            outline: none;
+            box-shadow: 0 0 5px 1px #fff;
+        }
+        .form button[type="submit"] {
+            background-color: #777;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .form button[type="submit"]:hover {
+            background-color: #999;
+        }
+    </style>
 </head>
-<body>
-    <header>
-      <div class="container">
-        <h2>Formulario Alta Profesores</h2>
-      </div>
-    </header>
-
+    <body>
     <div class="container">
+        <form class="form" action="/profesor/registroProfesorPost" method="POST">
+            <h1>Editar Alumno</h1>
+            <label for="apellido">Apellido</label>
+            <input type="text" id="apellido" name="apellido">
 
-        <form action="/profesor/registroProfesorPost" method="POST">
+            <label for="dni">DNI</label>
+            <input type="text" id="dni" name="dni">
 
-            <div class="form-group">
-                <input type="text" class="form-group" name="apellido" placeholder="Apellido Profesor">
 
-                <input type="text" class="form-group" name="dni" placeholder="DNI">
+            <div th:if="${error != null}" class="card text-white bg-danger mb-3 mensajeError">
+                <div class="card-body">
+                    <h5 class="card-title">Error</h5>
+                    <p class="card-text" th:text="${error}"></p>
 
-                <input type="text" class="form-group" name="curso" placeholder="Curso">
-
-                <select name="turno">
-                    <c:forEach items="${turnos}" var="turno">
-                        <option value="${0}">MAÑANA</option>
-                        <option value="${turno}">${1}</option>
-                        <option value="${turno}">${turno}</option>
-                    </c:forEach>
-                </select>
-
-<!--                <div name="turno">-->
-
-<!--                    <select name="turno" placeholder="Turno">-->
-<!--                        <option value="" disabled selected>Selecciona una opción</option>-->
-<!--                        <option value="maniana">Turno Mañana</option>-->
-<!--                        <option value="tarde">Turno Tarde</option>-->
-<!--                        <option value="noche">Turno Noche</option>-->
-
-<!--                    </select>-->
-<!--                </div>-->
-
-                <div th:if="${error != null}" class="card text-white bg-danger mb-3 mensajeError">
-                    <div class="card-body">
-                        <h5 class="card-title">Error</h5>
-                        <p class="card-text" th:text="${error}"></p>
-
-                    </div>
                 </div>
-
-                <div th:if="${crear != null}" class="card text-white by-succes mb-3 mensajeExito">
-                    <div class="card-body">
-                        <h5 class="card-title">Profesor creado con Exito</h5>
-                        <p class="card-text" th:text="${crear}"></p>
-                    </div>
-                </div>
-
-            <button type="submit" class="btn btn-primary">Crear</button>
-
             </div>
 
+            <div th:if="${crear != null}" class="card text-white by-succes mb-3 mensajeExito">
+                <div class="card-body">
+                    <h5 class="card-title">Profesor creado con Exito</h5>
+                    <p class="card-text" th:text="${crear}"></p>
+                </div>
+            </div>
 
+            <button type="submit">Crear</button>
         </form>
     </div>
-</body>
+    </body>
 </html>

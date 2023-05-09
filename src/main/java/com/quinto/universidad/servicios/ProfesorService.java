@@ -2,6 +2,7 @@ package com.quinto.universidad.servicios;
 
 import com.quinto.universidad.entidades.Curso;
 import com.quinto.universidad.entidades.Profesor;
+import com.quinto.universidad.entidades.Turno;
 import com.quinto.universidad.exceptions.AtrapaErrores;
 import com.quinto.universidad.repositorios.CursoRepository;
 import com.quinto.universidad.repositorios.ProfesorRepository;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,15 +20,21 @@ public class ProfesorService {
     ProfesorRepository profesorRepository;
     @Autowired
     CursoRepository cursoRepository;
+    @Autowired
+    CursoService cursoService;
 
 
     @Transactional
     public void crearProfesor(Integer dni, String apellido, String materia) throws AtrapaErrores{
         Profesor profesor = new Profesor();
+        Curso curso = new Curso();
         validarDniProfesor(dni);
         profesor.setDni(dni);
         validarApellidoProfesor(apellido);
         profesor.setApellido(apellido);
+        profesor.setCursos((List<Curso>) curso.setMateria(materia));
+        profesor.setEstado("activo");
+        profesor.setFechaAlta(LocalDateTime.now());
 
         profesorRepository.save(profesor);
 
@@ -39,6 +47,8 @@ public class ProfesorService {
         profesor.setDni(dni);
         validarApellidoProfesor(apellido);
         profesor.setApellido(apellido);
+        profesor.setEstado("activo");
+        profesor.setFechaAlta(LocalDateTime.now());
 
         profesorRepository.save(profesor);
 
