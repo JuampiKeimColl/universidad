@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Universidad Tuki</title>
+</head>
+<body>
+    <header>
+      <div class="container">
+        <h2>Formulario Alta Profesores</h2>
+      </div>
+    </header>
+
+    <div class="container">
+
+        <form action="/profesor/registroProfesorPost" method="POST">
+
+            <div class="form-group">
+                <input type="text" class="form-group" name="apellido" placeholder="Apellido Profesor">
+
+                <input type="text" class="form-group" name="dni" placeholder="DNI">
+
+                <input type="text" class="form-group" name="curso" placeholder="Curso">
+
+                <select name="turno">
+                    <c:forEach items="${turnos}" var="turno">
+                        <option value="${0}">MAÑANA</option>
+                        <option value="${turno}">${1}</option>
+                        <option value="${turno}">${turno}</option>
+                    </c:forEach>
+                </select>
+
+<!--                <div name="turno">-->
+
+<!--                    <select name="turno" placeholder="Turno">-->
+<!--                        <option value="" disabled selected>Selecciona una opción</option>-->
+<!--                        <option value="maniana">Turno Mañana</option>-->
+<!--                        <option value="tarde">Turno Tarde</option>-->
+<!--                        <option value="noche">Turno Noche</option>-->
+
+<!--                    </select>-->
+<!--                </div>-->
+
+                <div th:if="${error != null}" class="card text-white bg-danger mb-3 mensajeError">
+                    <div class="card-body">
+                        <h5 class="card-title">Error</h5>
+                        <p class="card-text" th:text="${error}"></p>
+
+                    </div>
+                </div>
+
+                <div th:if="${crear != null}" class="card text-white by-succes mb-3 mensajeExito">
+                    <div class="card-body">
+                        <h5 class="card-title">Profesor creado con Exito</h5>
+                        <p class="card-text" th:text="${crear}"></p>
+                    </div>
+                </div>
+
+            <button type="submit" class="btn btn-primary">Crear</button>
+
+            </div>
+
+
+        </form>
+    </div>
+</body>
+</html>

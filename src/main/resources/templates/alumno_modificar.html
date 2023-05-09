@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Editar Alumno</title>
+    </head>
+        <body>
+                <form th:action="@{/administrador/modificar/__${alumno.dni}__}" method="POST">
+
+                    <div class="form-group">
+                        <input type="text" th:value="${dni}" name="dni" placeholder="DNI">
+
+                        <input type="text" class="form-group" name="nombre" placeholder="Nombre Alumno">
+
+                        <input type="text" class="form-group" name="apellido" placeholder="Apellido Alumno">
+
+                        <input type="text" class="form-group" name="edad" placeholder="Edad">
+
+                        <input type="text" class="form-group" name="direccion" placeholder="Direccion">
+
+                        <div th:if="${error != null}" class="card text-white bg-danger mb-3 mensajeError">
+                            <div class="card-body">
+                                <h5 class="card-title">Error</h5>
+                                <p class="card-text" th:text="${error}"></p>
+
+                            </div>
+                        </div>
+
+                        <div th:if="${crear != null}" class="card text-white by-succes mb-3 mensajeExito">
+                            <div class="card-body">
+                                <h5 class="card-title">Alumno editado con Exito</h5>
+                                <p class="card-text" th:text="${crear}"></p>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Editar</button>
+
+                    </div>
+
+
+                </form>
+        </body>
+</html>
