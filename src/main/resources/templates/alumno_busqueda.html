@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Input de búsqueda con estilo retro</title>
+    <style>
+        body {
+            background-color: #333333;
+            color: #ffffff;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 18px;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        .search-container {
+            background-color: #999999;
+            padding: 20px;
+            border-radius: 10px;
+            filter: grayscale(100%);
+            -webkit-filter: grayscale(100%);
+            -moz-filter: grayscale(100%);
+            -ms-filter: grayscale(100%);
+            -o-filter: grayscale(100%);
+        }
+        .search-container input[type="text"] {
+            background-color: transparent;
+            border: none;
+            border-bottom: 2px solid #ffffff;
+            color: #ffffff;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 24px;
+            padding: 10px;
+            width: 300px;
+            text-align: center;
+            margin: 20px 0;
+        }
+        .search-container input[type="submit"] {
+            background-color: #ffffff;
+            color: #333333;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+        }
+        .search-container input[type="submit"]:hover {
+            background-color: #333333;
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="search-container">
+        <form th:action="@{/administrador/busquedaAlumnos}" method="POST">
+            <input type="text" th:value="${nombre}" placeholder="Buscar...">
+            <input type="submit" value="Buscar">
+        </form>
+    </div>
+</div>
+</body>
+</html>

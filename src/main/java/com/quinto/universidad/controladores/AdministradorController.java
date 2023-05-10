@@ -71,6 +71,20 @@ public class AdministradorController {
         return "alumno_lista.html";
     }
 
+    @GetMapping("/nombreAlumnos")
+    public String nombreAlumnos(){
+
+        return "alumno_busqueda.html";
+    }
+
+    @PostMapping("/busquedaAlumnos")
+    public String busquedaAlumnos(String nombre, ModelMap modelMap){
+        List<Alumno> alumno = alumnoService.buscarAlumnos(nombre);
+        modelMap.addAttribute("alumnos", alumno);
+
+        return "alumno_busqueda_resultado.html";
+    }
+
     @GetMapping("/listaProfesores")
     public String listaProfesores(ModelMap modelMap){
         List<Profesor> profesor = profesorService.listarProfesores();
