@@ -6,6 +6,8 @@ import com.quinto.universidad.exceptions.AtrapaErrores;
 import com.quinto.universidad.exceptions.CursoNotFoundException;
 import com.quinto.universidad.repositorios.AlumnoRepository;
 import com.quinto.universidad.repositorios.CursoRepository;
+import com.quinto.universidad.utilidades.Estado;
+import com.quinto.universidad.utilidades.Rol;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,16 +27,20 @@ public class AlumnoService {
 
     @Transactional
     public void crearAlumno(Integer dni, String nombre, String apellido, Integer edad,
-                            String direccion) throws AtrapaErrores {
+                            String direccion, String email, String password, String password2) throws AtrapaErrores {
         Alumno alumno = new Alumno();
         validarDniAlumno(dni);
-
+        validarAlumno(nombre, apellido, email, password, password2);
         alumno.setDni(dni);
         alumno.setNombre(nombre);
         alumno.setApellido(apellido);
         alumno.setEdad(edad);
         alumno.setDireccion(direccion);
         alumno.setFechaAlta(LocalDateTime.now());
+        alumno.setEmail(email);
+        alumno.setPassword(password);
+        alumno.setEstado(Estado.ACTIVO);
+        alumno.setRol(Rol.USER);
 
         alumnoRepository.save(alumno);
     }
@@ -92,6 +98,31 @@ public class AlumnoService {
     private void validarDniAlumno(Integer dni) throws AtrapaErrores{
         if (dni == null || dni.toString().isEmpty()){
             throw new AtrapaErrores("El DNI del Alumno es obligatorio. ");
+
+        }
+
+    }
+
+    private void validarAlumno(String nombre, String apellido, String email, String password,
+                               String password2) throws AtrapaErrores {
+        if (nombre == null || nombre.isEmpty()){
+            throw new AtrapaErrores("El nombre es obligatorio. ");
+
+        }
+        if (apellido == null || apellido.isEmpty()){
+            throw new AtrapaErrores("El apellido es obligatorio. ");
+
+        }
+        if (email == null || email.isEmpty()){
+            throw new AtrapaErrores("El email es obligatorio. ");
+
+        }
+        if (password == null || password.length() <=6){
+            throw new AtrapaErrores("El password es obligatorio y debe ser mayor a 6 digitos. ");
+
+        }
+        if (!password.equals(password2)){
+            throw new AtrapaErrores("La confirmación del password deben coincidir. ");
 
         }
 

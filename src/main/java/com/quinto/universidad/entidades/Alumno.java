@@ -1,5 +1,7 @@
 package com.quinto.universidad.entidades;
 
+import com.quinto.universidad.utilidades.Estado;
+import com.quinto.universidad.utilidades.Rol;
 import lombok.*;
 
 
@@ -23,7 +25,9 @@ public class Alumno {
     private String direccion;
     private LocalDateTime fechaAlta;
     private LocalDateTime fechaBaja;
-    private String estado;
+    private Estado estado;
+    private String email;
+    private String password;
 
 
     @ManyToMany
@@ -33,5 +37,8 @@ public class Alumno {
             inverseJoinColumns = @JoinColumn(name = "cursoId")
     )
     Set<Curso> cursos;
+
+    @Enumerated(EnumType.STRING)
+    private Rol rol;
 
 }

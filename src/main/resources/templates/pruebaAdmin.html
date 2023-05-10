@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <title>Crear Administrador</title>
@@ -58,35 +58,35 @@
         }
     </style>
 </head>
-    <body>
-        <div class="container">
-            <form class="form" th:action="@{/administrador/registroAdministradorPost}" method="POST">
-                <h1>Crear Administrador</h1>
-                <label for="usuario">Usuario</label>
-                <input type="text" id="usuario" name="usuario" th:value="${usuario}">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" th:value="${email}">
-                <label for="password">Contraseña</label>
-                <input type="password" id="password" name="password" th:value="${password}">
-                <label for="password2">Confirmar Contraseña</label>
-                <input type="password" id="password2" name="password2" th:value="${password2}">
+<body>
+<div class="container">
+    <form class="form" action="/administrador/registroAdministradorPost" method="POST">
+        <h1>Crear Administrador</h1>
+        <label for="usuario">Usuario</label>
+        <input type="text" id="usuario" name="usuario">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email">
+        <label for="password">Contraseña</label>
+        <input type="password" id="password" name="password">
+        <label for="password2">Confirmar Contraseña</label>
+        <input type="password" id="password2" name="password2">
 
-                <div th:if="${error != null}" class="card text-white bg-danger mb-3 mensajeError">
-                    <div class="card-body">
-                        <h5 class="card-title">Error</h5>
-                        <p class="card-text" th:text="${error}"></p>
-                    </div>
-                </div>
-
-                <div th:if="${crear != null}" class="card text-white by-succes mb-3 mensajeExito">
-                    <div class="card-body">
-                        <h5 class="card-title">Usuario creado con Exito</h5>
-                        <p class="card-text" th:text="${crear}"></p>
-                    </div>
-                </div>
-
-                <button type="submit">Crear Administrador</button>
-            </form>
+        <div th:if="${error != null}" class="card text-white bg-danger mb-3 mensajeError">
+            <div class="card-body">
+                <h5 class="card-title">Error</h5>
+                <p class="card-text" th:text="${error}"></p>
+            </div>
         </div>
+
+        <div th:if="${crear != null}" class="card text-white by-succes mb-3 mensajeExito">
+            <div class="card-body">
+                <h5 class="card-title">Usuario creado con Exito</h5>
+                <p class="card-text" th:text="${crear}"></p>
+            </div>
+        </div>
+
+        <button type="submit">Crear Administrador</button>
+    </form>
+</div>
 </body>
 </html>

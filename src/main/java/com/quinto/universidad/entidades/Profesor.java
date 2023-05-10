@@ -1,5 +1,7 @@
 package com.quinto.universidad.entidades;
 
+import com.quinto.universidad.utilidades.Estado;
+import com.quinto.universidad.utilidades.Rol;
 import lombok.*;
 
 
@@ -18,12 +20,16 @@ public class Profesor {
     @Column(unique = true)
     private Integer dni;
     private String apellido;
-    private String estado;
+    private Estado estado;
     private LocalDateTime fechaAlta;
     private LocalDateTime fechaBaja;
-
+    private String email;
+    private String password;
 
     @OneToMany(mappedBy = "profesor")
     private List<Curso> cursos;
+
+    @Enumerated(EnumType.STRING)
+    private Rol rol;
 
 }

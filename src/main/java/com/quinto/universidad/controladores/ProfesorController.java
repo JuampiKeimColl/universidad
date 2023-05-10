@@ -1,6 +1,6 @@
 package com.quinto.universidad.controladores;
 
-import com.quinto.universidad.entidades.Turno;
+import com.quinto.universidad.utilidades.Turno;
 import com.quinto.universidad.exceptions.AtrapaErrores;
 import com.quinto.universidad.servicios.ProfesorService;
 import com.quinto.universidad.servicios.TurnoService;
@@ -34,10 +34,11 @@ public class ProfesorController {
     @PostMapping("/registroProfesorPost")
     public String registroProfesorPost(@RequestParam(required = false) String apellido,
                                        @RequestParam(required = false) Integer dni,
-                                       @RequestParam(required = false) String curso, ModelMap modelMap){
+                                       @RequestParam(required = false) String email, String password,
+                                       String password2, ModelMap modelMap){
         log.info("Creando Profesor: " + apellido + " DNI: " + dni);
         try {
-        profesorService.crearProfesor(dni,apellido);
+        profesorService.crearProfesor(dni,apellido, email, password, password2);
         modelMap.put("crear", "Alumno " + apellido + " creado con éxito. ");
 
         }catch (AtrapaErrores er){

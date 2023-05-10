@@ -19,4 +19,27 @@ public class UniversidadController {
         return "login.html";
     }
 
+    @GetMapping("/registroUsuario")
+    public String registroUsuario(){
+
+        return "registro_usuario.html";
+    }
+
+    @GetMapping("/alumno")
+    public String loginAlumno(){
+
+        return "alumno_form.html";
+    }
+
+    @GetMapping("/profesor")
+    public String loginProfesor(){
+
+        return "profesor_form.html";
+    }
+
+    @GetMapping("/administrador")
+    public String loginAdministrador(){
+
+        return "administrador_form.html";
+    }
 }

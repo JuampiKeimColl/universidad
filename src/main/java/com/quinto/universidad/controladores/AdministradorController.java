@@ -34,14 +34,17 @@ public class AdministradorController {
 
 
     @PostMapping("/registroAdministradorPost")
-    public String registroAdministradorPost(@RequestParam(required = false) Integer id,
-                                            @RequestParam(required = false) String usuario, ModelMap modelMap){
-        log.info("Creando Admin: " + id + " Usuario: " + usuario);
+    public String registroAdministradorPost(@RequestParam(required = false) String usuario,
+                                            @RequestParam(required = false) String email, String password,
+                                            String password2, ModelMap modelMap){
+        log.info("Creando Admin: " + usuario);
         try {
-            administradorService.crearAdmin(id, usuario);
-            modelMap.put("crear", "Usuario " + usuario + " creado con éxito. ");
+            administradorService.crearAdmin(usuario, email, password, password2);
+            modelMap.put("crear", "Usuario creado con éxito. ");
         }catch (AtrapaErrores er){
             modelMap.put("error" , er.getMessage());
+            modelMap.put("usuario" , usuario);
+            modelMap.put("email" , email);
             log.info("Se produjo un error al registrar los datos: " + er);
             return "administrador_form.html";
         }

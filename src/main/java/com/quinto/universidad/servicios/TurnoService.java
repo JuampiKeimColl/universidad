@@ -1,6 +1,6 @@
 package com.quinto.universidad.servicios;
 
-import com.quinto.universidad.entidades.Turno;
+import com.quinto.universidad.utilidades.Turno;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;

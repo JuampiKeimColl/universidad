@@ -1,9 +1,8 @@
 package com.quinto.universidad.servicios;
 
-import com.quinto.universidad.entidades.Alumno;
 import com.quinto.universidad.entidades.Curso;
 import com.quinto.universidad.entidades.Profesor;
-import com.quinto.universidad.entidades.Turno;
+import com.quinto.universidad.utilidades.Turno;
 import com.quinto.universidad.exceptions.AtrapaErrores;
 import com.quinto.universidad.repositorios.CursoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
