@@ -66,27 +66,35 @@
             background-color: #666;
             border-color: #666;
         }
+
+        div {
+            text-align: center;
+        }
+        a{
+            text-align: center;
+        }
     </style>
 
 </head>
-<body>
-<div class="container">
-    <form class="form-signin" th:action="@{/logincheck}" method="POST">
-        <h1 class="h3 mb-3 font-weight-normal">Inicio de sesión</h1>
-        <label class="sr-only">Correo electrónico</label>
-        <input type="email"  class="form-control" name="email" placeholder="Correo electrónico" required autofocus>
+    <body>
+            <div class="container">
+                <form class="form-signin" th:action="@{/logincheck}" method="POST">
+                    <h1 class="h3 mb-3 font-weight-normal">Inicio de sesión</h1>
+                    <label class="sr-only">Correo electrónico</label>
+                    <input type="email"  class="form-control" name="email" placeholder="Correo electrónico" required autofocus>
 
-        <label  class="sr-only">Contraseña</label>
-        <input type="password"  class="form-control" name="password" placeholder="Contraseña" required>
+                    <label  class="sr-only">Contraseña</label>
+                    <input type="password"  class="form-control" name="password" placeholder="Contraseña" required>
 
-        <div class="checkbox mb-3">
-            <label>
-                <input type="checkbox" value="remember-me"> Recordarme
-            </label>
-        </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Iniciar sesión</button>
-        <p class="mt-5 mb-3 text-muted">&copy; Universidad</p>
-    </form>
-</div>
-</body>
+                    <div class="checkbox mb-3">
+                        <label>
+                            <input type="checkbox" value="remember-me"> Recordarme
+                        </label>
+                    </div>
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">Iniciar sesión</button>
+                    <button><a href="/">Volver</a></button>
+                    <p class="mt-5 mb-3 text-muted">&copy; Universidad</p>
+                </form>
+            </div>
+    </body>
 </html>

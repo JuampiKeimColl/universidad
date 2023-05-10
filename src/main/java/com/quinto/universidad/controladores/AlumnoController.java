@@ -35,9 +35,15 @@ public class AlumnoController {
 
         }catch (AtrapaErrores er){
             modelMap.put("error" , er.getMessage());
+            modelMap.put("dni" , dni);
+            modelMap.put("nombre" , nombre);
+            modelMap.put("apellido" , apellido);
+            modelMap.put("edad" , edad);
+            modelMap.put("direccion" , direccion);
+            modelMap.put("email" , email);
             log.info("Se produjo un error al registrar los datos: " + er.getMessage());
             return "alumno_form.html";
         }
-        return "index.html";
+        return new String("redirect:/");
     }
 }

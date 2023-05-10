@@ -17,6 +17,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -51,6 +52,7 @@ public class ProfesorService implements UserDetailsService {
         profesor.setApellido(apellido);
         profesor.setEmail(email);
         profesor.setPassword(password);
+        profesor.setFechaAlta(LocalDateTime.now());
         profesor.setEstado(Estado.ACTIVO);
         profesor.setRol(Rol.USER);
 
@@ -67,24 +69,34 @@ public class ProfesorService implements UserDetailsService {
         return profe;
     }
 
-//    @Transactional
-//    public void modificarProfesor(Integer dni, String apellido) throws AtrapaErrores{
-//        Optional<Profesor> rta = profesorRepository.findById(dni);
-//        validarDniProfesor(dni);
-//
-//        if (rta.isPresent()){
-//            Profesor profesor = rta.get();
-//            profesor.setApellido(apellido);;
-//
-//            profesorRepository.save(profesor);
-//        }
-//    }
+    @Transactional
+    public void modificarProfesor(long profesorId, Integer dni, String apellido) throws AtrapaErrores{
+        Optional<Profesor> rta = profesorRepository.findById(profesorId);
+        //validarDniProfesor(dni);
+
+        if (rta.isPresent()){
+            Profesor profesor = rta.get();
+            profesor.setDni(dni);
+            profesor.setApellido(apellido);
+
+            profesorRepository.save(profesor);
+        }
+    }
 
     public List<Profesor> listarProfesores(){
 
         return profesorRepository.findAll();
     }
 
+    public Profesor getOne(long profesorId){
+
+        return profesorRepository.getOne(profesorId);
+    }
+
+    public void eliminarProfesor(long profesorId){
+
+        profesorRepository.deleteById(profesorId);
+    }
 //    public Optional<Profesor> listarCursosProfesores(String materia){
 //
 //        return profesorRepository.findById(Integer.valueOf(materia));

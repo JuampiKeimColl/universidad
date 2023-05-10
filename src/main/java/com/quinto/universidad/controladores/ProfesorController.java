@@ -43,10 +43,13 @@ public class ProfesorController {
 
         }catch (AtrapaErrores er){
             modelMap.put("error" , er.getMessage());
+            modelMap.put("dni" , dni);
+            modelMap.put("apellido" , apellido);
+            modelMap.put("email" , email);
 
             log.info("Se produjo un error al registrar los datos: " + er.getMessage());
             return "profesor_form.html";
         }
-        return "index.html";
+        return new String("redirect:/");
     }
 }

@@ -2,10 +2,12 @@ package com.quinto.universidad.controladores;
 
 import com.quinto.universidad.entidades.Alumno;
 import com.quinto.universidad.entidades.Curso;
+import com.quinto.universidad.entidades.Profesor;
 import com.quinto.universidad.exceptions.AtrapaErrores;
 import com.quinto.universidad.servicios.AdministradorService;
 import com.quinto.universidad.servicios.AlumnoService;
 import com.quinto.universidad.servicios.CursoService;
+import com.quinto.universidad.servicios.ProfesorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -26,6 +28,8 @@ public class AdministradorController {
     CursoService cursoService;
     @Autowired
     AlumnoService alumnoService;
+    @Autowired
+    ProfesorService profesorService;
 
     @GetMapping("/registrarAdministradorGet")
     public String registrarAdministradorGet(){
@@ -48,7 +52,7 @@ public class AdministradorController {
             log.info("Se produjo un error al registrar los datos: " + er);
             return "administrador_form.html";
         }
-        return "index.html";
+        return new String("redirect:/");
     }
 
     @GetMapping("/administradorBusquedas")
@@ -65,6 +69,22 @@ public class AdministradorController {
         modelMap.addAttribute("alumnos", alumno);
 
         return "alumno_lista.html";
+    }
+
+    @GetMapping("/listaProfesores")
+    public String listaProfesores(ModelMap modelMap){
+        List<Profesor> profesor = profesorService.listarProfesores();
+        modelMap.addAttribute("profesores", profesor);
+
+        return "profesor_lista.html";
+    }
+
+    @GetMapping("/listaCursos")
+    public String listaDeCursos(ModelMap modelMap){
+        List<Curso> curso = cursoService.listarCursos();
+        modelMap.addAttribute("cursos", curso);
+
+        return "curso_lista.html";
     }
 
     @GetMapping("/modificar/{alumnoId}")
@@ -86,6 +106,50 @@ public class AdministradorController {
             modelMap.put("error", er.getMessage());
             return "alumno_modificar.html";
         }
+
+    }
+
+    @GetMapping("/modificarProfesor/{profesorId}")
+    public String modificarProfesor(@PathVariable long profesorId, ModelMap modelMap){
+        modelMap.put("profesor",profesorService.getOne(profesorId));
+
+        return "profesor_modificar.html";
+    }
+
+    @PostMapping("/modificarProfesor/{profesorId}")
+    public String modificarProfesor(@PathVariable long profesorId, Integer dni, String apellido, ModelMap modelMap){
+        try {
+
+            profesorService.modificarProfesor(profesorId, dni, apellido);
+            return "redirect:../listaProfesores";
+        }catch (AtrapaErrores er){
+            log.info("Se produjo un error al registrar los datos: " + er.getMessage());
+            modelMap.put("error", er.getMessage());
+            return "profesor_modificar.html";
+        }
+
+    }
+
+//    @GetMapping("/eliminarProfesor/{profesorId}")
+//    public String eliminarProfesor(@PathVariable long profesorId, ModelMap modelMap){
+//        modelMap.put("profesor",profesorService.getOne(profesorId));
+//
+//        return "profesor_modificar.html";
+//    }
+
+    @GetMapping("/eliminarProfesor/{profesorId}")
+    public String eliminarProfesor(@PathVariable long profesorId, ModelMap modelMap){
+
+        profesorService.eliminarProfesor(profesorId);
+        return "redirect:../listaProfesores";
+
+    }
+
+    @GetMapping("/eliminarAlumno/{alumnoId}")
+    public String eliminarAlumno(@PathVariable long alumnoId, ModelMap modelMap){
+
+        alumnoService.eliminarAlumno(alumnoId);
+        return "redirect:../listaAlumnos";
 
     }
 

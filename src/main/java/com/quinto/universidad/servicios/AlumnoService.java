@@ -71,6 +71,7 @@ public class AlumnoService implements UserDetailsService {
 
         if (rta.isPresent()){
             Alumno alumno = rta.get();
+            alumno.setDni(dni);
             alumno.setNombre(nombre);
             alumno.setApellido(apellido);
             alumno.setDireccion(direccion);
@@ -90,9 +91,14 @@ public class AlumnoService implements UserDetailsService {
         return alumnoRepository.getOne(alumnoId);
     }
 
-    public List<Alumno> buscarAlumnos(String letra){
+    public void eliminarAlumno(long alumnoId){
 
-        return alumnoRepository.buscarPorLetra(letra);
+        alumnoRepository.deleteById(alumnoId);
+    }
+
+    public List<Alumno> buscarAlumnos(String nombre){
+
+        return alumnoRepository.buscarPorNombre(nombre);
     }
 
     public List<Alumno> cursoAlumnos(long cursoId){
