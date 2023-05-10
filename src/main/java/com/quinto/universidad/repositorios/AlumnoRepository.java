@@ -15,4 +15,7 @@ public interface AlumnoRepository extends JpaRepository<Alumno, Long> {
 
     @Query(value = "SELECT a FROM Alumno a INNER JOIN alumno_curso ac ON ac.alumnoId = a.alumnoId WHERE ac.cursoId = :cursoId", nativeQuery = true )
     public List<Alumno> buscarPorCurso(@Param("cursoId") long cursoId);
+
+    @Query("SELECT a FROM Alumno a WHERE a.email = :email")
+    public Alumno buscarPorEmail(@Param("email") String email);
 }

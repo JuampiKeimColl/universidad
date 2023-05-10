@@ -23,11 +23,13 @@ public class AlumnoController {
 
     @PostMapping("/registroAlumnoPost")
     public String registroAlumnoPost(@RequestParam(required = false) Integer dni, String nombre,
-                                     @RequestParam String apellido, @RequestParam(required = false) Integer edad,
-                                     String direccion, ModelMap modelMap){
+                                     @RequestParam String apellido, Integer edad, String direccion,
+                                     @RequestParam(required = false) String email, String password,
+                                     String password2, ModelMap modelMap){
         log.info("Creando Alumno: " + apellido + " DNI: " + dni);
         try {
-            alumnoService.crearAlumno(dni, nombre, apellido, edad, direccion);
+            alumnoService.crearAlumno(dni, nombre, apellido, edad,
+                    direccion, email, password, password2);
 
             modelMap.put("crear", "Alumno " + apellido + " creado con éxito. ");
 

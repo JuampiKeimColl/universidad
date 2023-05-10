@@ -1,5 +1,6 @@
 package com.quinto.universidad.entidades;
 
+import com.quinto.universidad.utilidades.Turno;
 import lombok.*;
 
 
@@ -15,6 +16,8 @@ public class Curso {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long cursoId;
     private String materia;
+
+    @Enumerated(EnumType.STRING)
     private Turno turno;
 
     @ManyToMany(mappedBy = "cursos")

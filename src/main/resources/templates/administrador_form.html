@@ -2,51 +2,92 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Universidad Tuki</title>
+    <title>Crear Administrador</title>
     <style>
         body {
             background-color: #333;
             font-family: Arial, sans-serif;
             color: #fff;
         }
+        .container {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .form {
+            max-width: 400px;
+            padding: 50px;
+            background-color: #444;
+            border-radius: 5px;
+        }
+        .form label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        .form input[type="text"],
+        .form input[type="email"],
+        .form input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            background-color: #666;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            font-size: 16px;
+        }
+        .form input[type="text"]:focus,
+        .form input[type="email"]:focus,
+        .form input[type="password"]:focus {
+            outline: none;
+            box-shadow: 0 0 5px 1px #fff;
+        }
+        .form button[type="submit"] {
+            background-color: #777;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .form button[type="submit"]:hover {
+            background-color: #999;
+        }
     </style>
 </head>
-<body>
-    <header>
+    <body>
         <div class="container">
-            <h2>Formulario Alta Administradores</h2>
-        </div>
-    </header>
+            <form class="form" th:action="@{/administrador/registroAdministradorPost}" method="POST">
+                <h1>Crear Administrador</h1>
+                <label for="usuario">Usuario</label>
+                <input type="text" id="usuario" name="usuario" th:value="${usuario}">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" th:value="${email}">
+                <label for="password">Contraseña</label>
+                <input type="password" id="password" name="password" th:value="${password}">
+                <label for="password2">Confirmar Contraseña</label>
+                <input type="password" id="password2" name="password2" th:value="${password2}">
 
-            <div class="container">
-
-                <form action="/administrador/registroAdministradorPost" method="POST">
-
-                    <div class="form-group">
-                        <input type="text" class="form-group" name="id" placeholder="Ingrese un Id">
-
-                        <input type="text" class="form-group" name="usuario" placeholder="Nombre Usuario">
-
-                        <div th:if="${error != null}" class="card text-white bg-danger mb-3 mensajeError">
-                            <div class="card-body">
-                                <h5 class="card-title">Error</h5>
-                                <p class="card-text" th:text="${error}"></p>
-                            </div>
-                        </div>
-
-                        <div th:if="${crear != null}" class="card text-white by-succes mb-3 mensajeExito">
-                            <div class="card-body">
-                                <h5 class="card-title">Usuario creado con Exito</h5>
-                                <p class="card-text" th:text="${crear}"></p>
-                            </div>
-                        </div>
-
-                        <button type="submit" class="btn btn-primary">Crear</button>
-
+                <div th:if="${error != null}" class="card text-white bg-danger mb-3 mensajeError">
+                    <div class="card-body">
+                        <h5 class="card-title">Error</h5>
+                        <p class="card-text" th:text="${error}"></p>
                     </div>
+                </div>
 
+                <div th:if="${crear != null}" class="card text-white by-succes mb-3 mensajeExito">
+                    <div class="card-body">
+                        <h5 class="card-title">Usuario creado con Exito</h5>
+                        <p class="card-text" th:text="${crear}"></p>
+                    </div>
+                </div>
 
-                </form>
-            </div>
+                <button type="submit">Crear Administrador</button>
+                <button type="submit"><a href="/" >Volver</a></button>
+            </form>
+        </div>
 </body>
 </html>

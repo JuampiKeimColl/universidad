@@ -1,4 +1,4 @@
-package com.quinto.universidad.entidades;
+package com.quinto.universidad.utilidades;
 
 import lombok.*;
 

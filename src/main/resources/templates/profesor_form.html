@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Crear Profesor</title>
@@ -27,8 +27,8 @@
             margin-bottom: 10px;
         }
         .form input[type="text"],
-        .form input[type="number"],
-        .form textarea {
+        .form input[type="email"],
+        .form input[type="password"] {
             width: 100%;
             padding: 10px;
             margin-bottom: 20px;
@@ -39,8 +39,8 @@
             font-size: 16px;
         }
         .form input[type="text"]:focus,
-        .form input[type="number"]:focus,
-        .form textarea:focus {
+        .form input[type="email"]:focus,
+        .form input[type="password"]:focus {
             outline: none;
             box-shadow: 0 0 5px 1px #fff;
         }
@@ -60,13 +60,20 @@
 </head>
     <body>
     <div class="container">
-        <form class="form" action="/profesor/registroProfesorPost" method="POST">
-            <h1>Editar Alumno</h1>
-            <label for="apellido">Apellido</label>
-            <input type="text" id="apellido" name="apellido">
-
+        <form class="form" th:action="@{/profesor/registroProfesorPost}" method="POST">
+            <h1>Crear Profesor</h1>
             <label for="dni">DNI</label>
-            <input type="text" id="dni" name="dni">
+            <input type="text" id="dni" name="dni" th:value="${dni}">
+            <label for="apellido">Apellido</label>
+            <input type="text" id="apellido" name="apellido" th:value="${apellido}">
+            <label for="dni">Email</label>
+            <input type="email" id="email" name="email" th:value="${email}">
+            <label for="dni">Password</label>
+            <input type="password" id="password" name="password" th:value="${password}">
+            <label for="dni">Confirmar Contraseña</label>
+            <input type="password" id="password2" name="password2" th:value="${password2}">
+
+
 
 
             <div th:if="${error != null}" class="card text-white bg-danger mb-3 mensajeError">
@@ -85,6 +92,8 @@
             </div>
 
             <button type="submit">Crear</button>
+            <button type="submit"><a href="/" >Volver</a></button>
+
         </form>
     </div>
     </body>

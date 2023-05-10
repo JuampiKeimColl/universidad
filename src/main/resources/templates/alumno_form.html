@@ -2,36 +2,86 @@
 <html lang="en"  xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Formulario Alta Alumno</title>
+    <title>Crear Alumno</title>
     <style>
         body {
             background-color: #333;
             font-family: Arial, sans-serif;
             color: #fff;
         }
+        .container {
+            width: 100%;
+            height: 100vh;
+            display: grid;
+            justify-content: center;
+            align-items: center;
+        }
+        .form {
+            max-width: 400px;
+            padding: 50px;
+            background-color: #444;
+            border-radius: 5px;
+        }
+        .form label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        .form input[type="text"],
+        .form input[type="email"],
+        .form input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            background-color: #666;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            font-size: 16px;
+        }
+        .form input[type="text"]:focus,
+        .form input[type="email"]:focus,
+        .form input[type="password"]:focus {
+            outline: none;
+            box-shadow: 0 0 5px 1px #fff;
+        }
+        .form button[type="submit"] {
+            background-color: #777;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .form button[type="submit"]:hover {
+            background-color: #999;
+        }
     </style>
 </head>
 <body>
-<header>
-    <div class="container">
-        <h2>Formulario Alta Alumno</h2>
-    </div>
-</header>
 
 <div class="container">
 
-    <form action="/alumno/registroAlumnoPost" method="POST">
+    <form class="form" th:action="@{/alumno/registroAlumnoPost}" method="POST">
 
-        <div class="form-group">
-            <input type="text" class="form-group" name="dni" placeholder="DNI">
+        <h1>Crear Alumno</h1>
+        <label for="dni">DNI</label>
+        <input type="text" id="dni" name="dni" th:value="${dni}">
+        <label for="nombre">Nombre</label>
+        <input type="text" id="nombre" name="nombre" th:value="${nombre}">
+        <label for="apellido">Apellido</label>
+        <input type="text" id="apellido" name="apellido" th:value="${apellido}">
+        <label for="edad">Edad</label>
+        <input type="text" id="edad" name="edad" th:value="${edad}">
+        <label for="direccion">Dirección</label>
+        <input type="text" id="direccion" name="direccion" th:value="${direccion}">
+        <label for="email">Email</label>
+        <input type="text" id="email" name="email" th:value="${email}">
 
-            <input type="text" class="form-group" name="nombre" placeholder="Nombre Alumno">
-
-            <input type="text" class="form-group" name="apellido" placeholder="Apellido Alumno">
-
-            <input type="text" class="form-group" name="edad" placeholder="Edad">
-
-            <input type="text" class="form-group" name="direccion" placeholder="Direccion">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" th:value="${password}">
+        <label for="password2">Confirmar Contraseña </label>
+        <input type="password" id="password2" name="password2" th:value="${password2}">
 
             <div th:if="${error != null}" class="card text-white bg-danger mb-3 mensajeError">
                 <div class="card-body">
@@ -49,8 +99,8 @@
             </div>
 
             <button type="submit" class="btn btn-primary">Crear</button>
+            <button type="submit"><a href="/" >Volver</a></button>
 
-        </div>
 
 
     </form>
