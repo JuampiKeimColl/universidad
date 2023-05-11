@@ -47,32 +47,31 @@
     <form>
 
         <div class="container">
-            <h1>Lista Alumnos</h1>
+            <h1>Lista Cursos</h1>
             <table>
                 <thead>
                     <tr>
-                        <th scope="col">DNI</th>
-                        <th scope="col">Nombre</th>
-                        <th scope="col">Apellido</th>
-                        <th scope="col">Direccion</th>
+                        <th scope="col">Materia</th>
+                        <th scope="col">Turno</th>
+                        <th scope="col">Profesor</th>
                         <th scope="col"></th>
                     </tr>
                 </thead>
-                <tbody th:each="alumno : ${alumnos}">
+                <tbody th:each="curso : ${cursos}">
                     <tr>
-                        <th scope="row" th:text="${alumno.dni}"></th>
-                        <td th:text="${alumno.nombre}"></td>
-                        <td th:text="${alumno.apellido}"></td>
-                        <td th:text="${alumno.direccion}"></td>
+                        <th scope="row" th:text="${curso.materia}"></th>
+                        <td th:text="${curso.turno}"></td>
+                        <td th:text="${curso.profesor}"></td>
+
                         <td>
-                            <a th:href="@{/administrador/modificar/__${alumno.alumnoId}__}"><i class="fas fa-edit"></i> Editar </a>
+                            <a th:href="@{/administrador/modificarCurso/__${curso.cursoId}__}"><i class="fas fa-edit"></i> Editar </a>
                             <a> / </a>
-                            <a><i class="fas fa-trash-alt"></i> Eliminar </a>
+                            <a th:href="@{/administrador/eliminarCurso/__${curso.cursoId}__}"><i class="fas fa-trash-alt"></i> Eliminar </a>
                         </td>
                     </tr>
                 </tbody>
             </table>
-        <button><a href="/">Crear curso</a></button>
+        <button><a href="../profesor/registrarCursoGet">Crear curso</a></button>
         </div>
     </form>
 </body>

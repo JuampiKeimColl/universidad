@@ -1,5 +1,6 @@
 package com.quinto.universidad.controladores;
 
+import com.quinto.universidad.servicios.CursoService;
 import com.quinto.universidad.utilidades.Turno;
 import com.quinto.universidad.exceptions.AtrapaErrores;
 import com.quinto.universidad.servicios.ProfesorService;
@@ -23,11 +24,13 @@ public class ProfesorController {
     ProfesorService profesorService;
     @Autowired
     TurnoService turnoService;
+    @Autowired
+    CursoService cursoService;
 
     @GetMapping("/registrarProfesorGet")
     public String registrarProfesorGet(ModelMap modelMap){
-        List<Turno> turno = turnoService.getTurnos();
-        modelMap.get(turno);
+//        List<Turno> turno = turnoService.getTurnos();
+//        modelMap.get(turno);
         return "profesor_form.html";
     }
 
@@ -51,5 +54,28 @@ public class ProfesorController {
             return "profesor_form.html";
         }
         return new String("redirect:/");
+    }
+
+    @GetMapping("/registrarCursoGet")
+    public String registrarCursoGet(ModelMap modelMap){
+
+        return "curso_form.html";
+    }
+
+    @PostMapping("/registrarCursoPost")
+    public String registrarCursoPost(@RequestParam(required = false) String materia,
+                                     ModelMap modelMap) throws AtrapaErrores {
+
+        try {
+            cursoService.crearCurso(materia);
+            modelMap.put("crear", materia + " creado con éxito. ");
+        } catch (AtrapaErrores er) {
+            modelMap.put("error" , er.getMessage());
+            modelMap.get(materia);
+            log.info("Se produjo un error al registrar los datos: " + er.getMessage());
+            return "curso_form.html";
+        }
+
+        return new String("redirect:/administrador/listaCursos");
     }
 }

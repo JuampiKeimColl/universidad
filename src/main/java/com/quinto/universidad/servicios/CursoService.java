@@ -17,6 +17,25 @@ public class CursoService {
     @Autowired
     CursoRepository cursoRepository;
 
+    public Curso getOne(long cursoId){
+
+        return cursoRepository.getOne(cursoId);
+    }
+    public void eliminarCurso(long cursoId){
+
+        cursoRepository.deleteById(cursoId);
+    }
+
+    @Transactional
+    public void crearCurso(String materia) throws AtrapaErrores {
+        Curso curso = new Curso();
+        //validarCurso(materia);
+
+        curso.setMateria(materia);
+
+        cursoRepository.save(curso);
+
+    }
     @Transactional
     public void crearCurso(String materia, Turno turno, Profesor profesor) throws AtrapaErrores{
         Curso curso = new Curso();
@@ -30,13 +49,14 @@ public class CursoService {
     }
 
     @Transactional
-    public void modificarCurso(long cursoId, Turno turno) throws AtrapaErrores{
+    public void modificarCurso(long cursoId, String materia) throws AtrapaErrores{
         Optional<Curso> rta = cursoRepository.findById(cursoId);
-        //validarMateriaCurso(cursoId);
+        //validarDniProfesor(dni);
 
         if (rta.isPresent()){
             Curso curso = rta.get();
-            curso.setTurno(turno);
+            curso.setMateria(materia);
+
 
             cursoRepository.save(curso);
         }

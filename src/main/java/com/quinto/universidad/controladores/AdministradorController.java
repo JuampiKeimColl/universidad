@@ -144,12 +144,33 @@ public class AdministradorController {
 
     }
 
-//    @GetMapping("/eliminarProfesor/{profesorId}")
-//    public String eliminarProfesor(@PathVariable long profesorId, ModelMap modelMap){
-//        modelMap.put("profesor",profesorService.getOne(profesorId));
-//
-//        return "profesor_modificar.html";
-//    }
+    @GetMapping("/modificarCurso/{cursoId}")
+    public String modificarCurso(@PathVariable long cursoId, ModelMap modelMap){
+        modelMap.put("curso",cursoService.getOne(cursoId));
+
+        return "curso_modificar.html";
+    }
+
+    @PostMapping("/modificarCurso/{cursoId}")
+    public String modificarCurso(@PathVariable long cursoId, String materia, ModelMap modelMap){
+        try {
+
+            cursoService.modificarCurso(cursoId, materia);
+            return "redirect:../listaCursos";
+        }catch (AtrapaErrores er){
+            log.info("Se produjo un error al registrar los datos: " + er.getMessage());
+            modelMap.put("error", er.getMessage());
+            return "curso_modificar.html";
+        }
+
+    }
+
+    @GetMapping("/eliminarCurso/{cursoId}")
+    public String eliminarCurso(@PathVariable long cursoId, ModelMap modelMap){
+        //modelMap.put("curso",cursoService.getOne(cursoId));
+        cursoService.eliminarCurso(cursoId);
+        return "redirect:../listaCursos";
+    }
 
     @GetMapping("/eliminarProfesor/{profesorId}")
     public String eliminarProfesor(@PathVariable long profesorId, ModelMap modelMap){
