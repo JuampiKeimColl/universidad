@@ -4,6 +4,7 @@ import com.quinto.universidad.entidades.Alumno;
 import com.quinto.universidad.entidades.Curso;
 import com.quinto.universidad.entidades.Profesor;
 import com.quinto.universidad.exceptions.AtrapaErrores;
+import com.quinto.universidad.repositorios.AlumnoRepository;
 import com.quinto.universidad.servicios.AdministradorService;
 import com.quinto.universidad.servicios.AlumnoService;
 import com.quinto.universidad.servicios.CursoService;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -30,6 +32,8 @@ public class AdministradorController {
     AlumnoService alumnoService;
     @Autowired
     ProfesorService profesorService;
+    @Autowired
+    AlumnoRepository alumnoRepository;
 
     @GetMapping("/registrarAdministradorGet")
     public String registrarAdministradorGet(){
@@ -77,10 +81,14 @@ public class AdministradorController {
         return "alumno_busqueda.html";
     }
 
-    @PostMapping("/busquedaAlumnos")
-    public String busquedaAlumnos(String nombre, ModelMap modelMap){
-        List<Alumno> alumno = alumnoService.buscarAlumnos(nombre);
-        modelMap.addAttribute("alumnos", alumno);
+    @GetMapping("/busquedaAlumnos")
+        public String busquedaAlumnos(@RequestParam(required = false)String nombre, ModelMap modelMap){
+
+            List<Alumno> listaAlumnos = new ArrayList<>();
+            if (nombre != null && !nombre.isEmpty()){
+                listaAlumnos =alumnoService.buscarAlumnos(nombre);
+            }
+            modelMap.addAttribute("alumnos",listaAlumnos);
 
         return "alumno_busqueda_resultado.html";
     }

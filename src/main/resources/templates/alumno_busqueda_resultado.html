@@ -41,6 +41,9 @@
             color: #fff;
             font-weight: 400;
         }
+        .mensaje-error {
+            color: red;
+        }
     </style>
 </head>
 <body>
@@ -58,15 +61,16 @@
                 <th scope="col"></th>
             </tr>
             </thead>
-            <tbody th:each="alumno : ${alumnos}">
-            <tr>
+            <tr th:each="alumno : ${alumnos}" th:if="${listaAlumnos == null or alumno.nombre.toLowerCase().contains(listaAlumnos.toLowerCase())}">
                 <th scope="row" th:text="${alumno.dni}"></th>
                 <td th:text="${alumno.nombre}"></td>
                 <td th:text="${alumno.apellido}"></td>
                 <td th:text="${alumno.direccion}"></td>
 
             </tr>
-            </tbody>
+            <tr th:if="${#lists.isEmpty(alumnos)}">
+                <td colspan="4">NO SE ENCONTRARON RESULTADOS</td>
+
         </table>
         <button><a href="../inicio">Inicio</a></button>
         <button type="submit"><a href="nombreAlumnos">Nueva busqueda</a></button>

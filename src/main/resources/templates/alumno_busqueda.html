@@ -57,10 +57,13 @@
 <body>
 <div class="container">
     <div class="search-container">
-        <form th:action="@{/administrador/busquedaAlumnos}" method="POST">
-            <input type="text" th:value="${nombre}" placeholder="Buscar...">
+        <form th:action="@{/administrador/busquedaAlumnos}" method="GET">
+            <input type="text" name="nombre" placeholder="Buscar...">
+<!--            <button type="submit">Buscar</button>-->
             <input type="submit" value="Buscar">
+
         </form>
+
     </div>
 </div>
 </body>
